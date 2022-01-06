@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{622DB5AD-75F1-458F-93DA-6A80CAA82D4B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MC_Design</RootNamespace>
+    <AssemblyName>MC-Design</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>86F66A481B420096AB730E01705AF9E8845166E5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>MC-Design_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Json, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c6752e45808247c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\JSON.1.0.1\lib\net40\Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.26\lib\net452\Zstandard.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\ZstdNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API.cs" />
+    <Compile Include="DataSets\ds_faculty.cs">
+      <DependentUpon>ds_faculty.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\ds_faculty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_faculty.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="db.cs" />
+    <Compile Include="DragControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DragControl.Designer.cs">
+      <DependentUpon>DragControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\canvas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\canvas.Designer.cs">
+      <DependentUpon>canvas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_about.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_about.Designer.cs">
+      <DependentUpon>panel_about.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_classes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_classes.Designer.cs">
+      <DependentUpon>panel_classes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_contact_us.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_contact_us.Designer.cs">
+      <DependentUpon>panel_contact_us.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_evaluation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_evaluation.Designer.cs">
+      <DependentUpon>panel_evaluation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_faculty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_faculty.Designer.cs">
+      <DependentUpon>panel_faculty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_home.Designer.cs">
+      <DependentUpon>panel_home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_logs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_logs.Designer.cs">
+      <DependentUpon>panel_logs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_notification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_notification.Designer.cs">
+      <DependentUpon>panel_notification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_profile.Designer.cs">
+      <DependentUpon>panel_profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_rating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_rating.Designer.cs">
+      <DependentUpon>panel_rating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_reviews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_reviews.Designer.cs">
+      <DependentUpon>panel_reviews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_student.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_student.Designer.cs">
+      <DependentUpon>panel_student.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_subjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_subjects.Designer.cs">
+      <DependentUpon>panel_subjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\panel_sy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\panel_sy.Designer.cs">
+      <DependentUpon>panel_sy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\reports\print_faculty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\reports\print_faculty.Designer.cs">
+      <DependentUpon>print_faculty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\reports\rpt_faculty.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_faculty.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_panel_classes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_panel_classes.Designer.cs">
+      <DependentUpon>add_panel_classes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_panel_faculty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_panel_faculty.Designer.cs">
+      <DependentUpon>add_panel_faculty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_panel_subject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_panel_subject.Designer.cs">
+      <DependentUpon>add_panel_subject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_school_year.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\add_school_year.Designer.cs">
+      <DependentUpon>add_school_year.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\manage_evaluation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\manage_evaluation.Designer.cs">
+      <DependentUpon>manage_evaluation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\manage_sy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\manage_sy.Designer.cs">
+      <DependentUpon>manage_sy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\show_evaluation_restriction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PanelForms\sub_panels\show_evaluation_restriction.Designer.cs">
+      <DependentUpon>show_evaluation_restriction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register.Designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\canvas.resx">
+      <DependentUpon>canvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_about.resx">
+      <DependentUpon>panel_about.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_classes.resx">
+      <DependentUpon>panel_classes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_contact_us.resx">
+      <DependentUpon>panel_contact_us.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_evaluation.resx">
+      <DependentUpon>panel_evaluation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_faculty.resx">
+      <DependentUpon>panel_faculty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_home.resx">
+      <DependentUpon>panel_home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_logs.resx">
+      <DependentUpon>panel_logs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_notification.resx">
+      <DependentUpon>panel_notification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_profile.resx">
+      <DependentUpon>panel_profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_rating.resx">
+      <DependentUpon>panel_rating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_reviews.resx">
+      <DependentUpon>panel_reviews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_student.resx">
+      <DependentUpon>panel_student.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_subjects.resx">
+      <DependentUpon>panel_subjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\panel_sy.resx">
+      <DependentUpon>panel_sy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\reports\print_faculty.resx">
+      <DependentUpon>print_faculty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\reports\rpt_faculty.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_faculty.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\sub_panels\add_panel_classes.resx">
+      <DependentUpon>add_panel_classes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\sub_panels\add_panel_faculty.resx">
+      <DependentUpon>add_panel_faculty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\sub_panels\add_panel_subject.resx">
+      <DependentUpon>add_panel_subject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\sub_panels\add_school_year.resx">
+      <DependentUpon>add_school_year.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\sub_panels\manage_evaluation.resx">
+      <DependentUpon>manage_evaluation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\sub_panels\manage_sy.resx">
+      <DependentUpon>manage_sy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelForms\sub_panels\show_evaluation_restriction.resx">
+      <DependentUpon>show_evaluation_restriction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataSets\ds_faculty.xsc">
+      <DependentUpon>ds_faculty.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\ds_faculty.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_faculty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\ds_faculty.xss">
+      <DependentUpon>ds_faculty.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

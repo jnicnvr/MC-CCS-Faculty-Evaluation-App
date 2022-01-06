@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ds_faculty" targetNamespace="http://tempuri.org/ds_faculty.xsd" xmlns:mstns="http://tempuri.org/ds_faculty.xsd" xmlns="http://tempuri.org/ds_faculty.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ds_faculty" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ds_faculty" msprop:Generator_UserDSName="ds_faculty">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_faculty" msprop:Generator_TableClassName="dt_facultyDataTable" msprop:Generator_TableVarName="tabledt_faculty" msprop:Generator_RowChangedName="dt_facultyRowChanged" msprop:Generator_TablePropName="dt_faculty" msprop:Generator_RowDeletingName="dt_facultyRowDeleting" msprop:Generator_RowChangingName="dt_facultyRowChanging" msprop:Generator_RowEvHandlerName="dt_facultyRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_facultyRowDeleted" msprop:Generator_RowClassName="dt_facultyRow" msprop:Generator_UserTableName="dt_faculty" msprop:Generator_RowEvArgName="dt_facultyRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="faculty_id" msprop:Generator_ColumnVarNameInTable="columnfaculty_id" msprop:Generator_ColumnPropNameInRow="faculty_id" msprop:Generator_ColumnPropNameInTable="faculty_idColumn" msprop:Generator_UserColumnName="faculty_id" type="xs:string" minOccurs="0" />
+              <xs:element name="fname" msprop:Generator_ColumnVarNameInTable="columnfname" msprop:Generator_ColumnPropNameInRow="fname" msprop:Generator_ColumnPropNameInTable="fnameColumn" msprop:Generator_UserColumnName="fname" type="xs:string" minOccurs="0" />
+              <xs:element name="lname" msprop:Generator_ColumnVarNameInTable="columnlname" msprop:Generator_ColumnPropNameInRow="lname" msprop:Generator_ColumnPropNameInTable="lnameColumn" msprop:Generator_UserColumnName="lname" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
