@@ -43,8 +43,9 @@ namespace MC_Design.PanelForms
                 String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchSubjects.php";
                 String res = api.SendPost(req, "");
 
-
+                MessageBox.Show(res);
                 var result = JArray.Parse(res);
+                MessageBox.Show(result);
 
                 //MessageBox.Show(""+details1[0]["success"]);
 

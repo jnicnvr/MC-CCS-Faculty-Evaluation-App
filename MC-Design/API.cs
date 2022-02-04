@@ -12,6 +12,7 @@ namespace MC_Design
 {
     class API
     {
+        private static readonly string baseURL = "http://45.76.152.7:8080/api/";
         public string SendPost(string url, string postData)
         {
             string webpageContent = string.Empty;
@@ -46,6 +47,34 @@ namespace MC_Design
             }
 
             return webpageContent;
+        }
+
+        public string webPostMethod(string param, string postData)
+        {
+            string responseFromServer = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(baseURL+param);
+            request.Method = "POST";
+            request.Credentials = CredentialCache.DefaultCredentials;
+            ((HttpWebRequest)request).UserAgent =
+                              "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0)";
+            request.Accept = "/";
+            request.UseDefaultCredentials = true;
+            request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
+            WebResponse response = request.GetResponse();
+            dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            responseFromServer = reader.ReadToEnd();
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+            return responseFromServer;
         }
 
         public void onAddLogs(String name, String activity, String user_level)

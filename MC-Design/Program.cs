@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MC_Design.PanelForms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,8 +20,8 @@ namespace MC_Design
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Application.Run(new Form1());
-            Application.Run(new Login());
+            Application.Run(new panel_getAAPI());
+            //Application.Run(new Login());
           
             //Application.Run(new Register());
         }
