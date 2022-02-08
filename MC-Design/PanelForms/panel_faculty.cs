@@ -27,9 +27,8 @@ namespace MC_Design.PanelForms
             PanelForms.sub_panels.add_panel_faculty add_faculty = new PanelForms.sub_panels.add_panel_faculty();
             add_faculty.Show();
         }
-        private void onLoadFaculty()
+        private async void onLoadFaculty()
         {
-            API api = new API();
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
             
@@ -42,10 +41,14 @@ namespace MC_Design.PanelForms
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 try
                 {
-                    String response = api.SendPost("http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchFaculty.php", "");
-                    var details1 = JArray.Parse(response);
-                    //MessageBox.Show(""+details1[0]["success"]);
-                    foreach (JObject data in details1)
+                string param = "teacher";
+                var res = await RESTHelper.GetAll(param);
+
+                Console.WriteLine(res);
+                var result = JArray.Parse(res);
+
+                //MessageBox.Show(""+details1[0]["success"]);
+                    foreach (JObject data in result)
                     {
                         string fid;
                         string fname;

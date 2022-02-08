@@ -24,7 +24,7 @@ namespace MC_Design.PanelForms.sub_panels
             this.Dispose();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Do you want to add new data?",
                       "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -32,16 +32,23 @@ namespace MC_Design.PanelForms.sub_panels
             {
                 try
                 {
-                    API api = new API();
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/InsertClasses.php";
-                    String curriculum = HttpUtility.UrlEncode("" + tb_curriculum.Text.ToString());
-                    String year_level = HttpUtility.UrlEncode("" + cmb_year_level.Text.ToString());
-                    String section = HttpUtility.UrlEncode("" + cmb_section.Text.ToString());
-                    String _class = curriculum + year_level + section+"";
+                    const string param = "class_list";
+                    string curriculum = tb_curriculum.Text;
+                    string year_level = cmb_year_level.Text;
+                    string section = cmb_section.Text;
+                    string _class = curriculum + year_level + section;
+                    object mydata = new
+                    {
+                        curriculum = curriculum,
+                        year_level = year_level,
+                        section = section,
+                        _class = _class
 
-                    String response = api.SendPost(req, String.Format("curriculum={0}&year_level={1}&section={2}&_class={3}", curriculum, year_level, section,_class));           
-                      var data = JObject.Parse(response);
-                      Console.WriteLine(data);                                          
+                    };
+                    var res = await RESTHelper.Post(param, mydata);
+                  
+                    var data = JObject.Parse(res);
+                    Console.WriteLine(data);                                          
                     onCheckValidation(tb_curriculum.Text, cmb_year_level.Text, cmb_section.Text, "Added New Class!");
                 }
                 catch (Exception err)

@@ -27,7 +27,7 @@ namespace MC_Design.PanelForms
             add_classes.Show();
         }
 
-        private void onLoadClasses()
+        private async void onLoadClasses()
         { 
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -42,10 +42,10 @@ namespace MC_Design.PanelForms
 
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchClasses.php";
-                String res = api.SendPost(req, "");
+                string param = "class_list";
+                var res = await RESTHelper.GetAll(param);
 
-
+                Console.WriteLine(res);
                 var result = JArray.Parse(res);
 
                 //MessageBox.Show(""+details1[0]["success"]);

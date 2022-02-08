@@ -18,9 +18,8 @@ namespace MC_Design.PanelForms
             InitializeComponent();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            API api = new API();
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
             if (comboBox1.SelectedIndex == 0)
@@ -46,8 +45,10 @@ namespace MC_Design.PanelForms
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 try
                 {
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/RatingReportManagement.php";
-                    String res = api.SendPost(req, "");
+                    string param = "rating";
+                    string id = "Management";
+                    var res = await RESTHelper.Get(param,id);
+
                     var data = JArray.Parse(res);
 
                     string description;
@@ -122,8 +123,9 @@ namespace MC_Design.PanelForms
 
                 try
                 {
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/RatingReportEffectiveness.php";
-                    String res = api.SendPost(req, "");
+                    string param = "rating";
+                    string id = "Effectiveness";
+                    var res = await RESTHelper.Get(param, id);
                     var data = JArray.Parse(res);
 
                     string description;
@@ -197,8 +199,9 @@ namespace MC_Design.PanelForms
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 try
                 {
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/RatingReportPEPQ.php";
-                    String res = api.SendPost(req, "");
+                    string param = "rating";
+                    string id = "Professional Ethics and Personal Qualities";
+                    var res = await RESTHelper.Get(param, id);
                     var data = JArray.Parse(res);
 
                     string description;

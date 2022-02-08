@@ -31,7 +31,7 @@ namespace MC_Design.PanelForms
             manage_sy.Show();
         }
 
-        private void onLoadSy()
+        private async void onLoadSy()
         {
             API api = new API();
             dataGridView1.Rows.Clear();
@@ -48,9 +48,10 @@ namespace MC_Design.PanelForms
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchSy.php";
-                String res = api.SendPost(req, "");
+                string param = "school_year";
+                var res = await RESTHelper.GetAll(param);
 
+                Console.WriteLine(res);
 
                 var details1 = JArray.Parse(res);
 

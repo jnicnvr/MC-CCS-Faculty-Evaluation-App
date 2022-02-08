@@ -19,7 +19,7 @@ namespace MC_Design.PanelForms.sub_panels
             InitializeComponent();
         }      
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private async void button1_Click_1(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Do you want to add new data?",
                      "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -27,23 +27,27 @@ namespace MC_Design.PanelForms.sub_panels
             {
                 try
                 {
-                    //add validation
-                    API api = new API();
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/InsertNewFaculty.php";
+                    string param = "teacher";
+                    string TID = tb_id.Text; 
+                    string Fname = tb_fname.Text;
+                    string Mname = tb_mname.Text;
+                    string Lname = tb_lname.Text;                                     
+                    object mydata = new
+                    {
+                        TID = TID,
+                        Fname = Fname,
+                        Mname = Mname,
+                        Lname = Lname                      
+                     
+                    };
 
-                    String TID = HttpUtility.UrlEncode("" + tb_id.Text.ToString());
-                    String Fname = HttpUtility.UrlEncode("" + tb_fname.Text.ToString());
-                    String Mname = HttpUtility.UrlEncode("" + tb_mname.Text.ToString());
-                    String Lname = HttpUtility.UrlEncode("" + tb_lname.Text.ToString());
-                    String name = HttpUtility.UrlEncode(tb_fname.Text.ToString() + " " + tb_mname.Text.ToString() + " " + tb_lname.Text.ToString());
-
-                     String result = api.SendPost(req, String.Format("TID={0}&Fname={1}&Mname={2}&Lname={3}&name={4}", TID, Fname, Mname, Lname, name));
-                     var details = JObject.Parse(result);
-                      Console.WriteLine(result);
+                    var res = await RESTHelper.Post(param, mydata);                    
+                    var details = JObject.Parse(res);
+                     Console.WriteLine(res);
                     //  Console.WriteLine(details);
                     //MessageBox.Show("" + details["success"]);
                     //MessageBox.Show("Faculty Registered!");
-                    onCheckValidation(tb_id.Text, tb_fname.Text, tb_lname.Text, tb_mname.Text);
+                    onCheckValidation(tb_id.Text, tb_fname.Text, tb_lname.Text);
 
                     //onTerminateRegister();
 
@@ -72,9 +76,9 @@ namespace MC_Design.PanelForms.sub_panels
             tb_lname.Text = "";
         }
 
-        public void onCheckValidation(String TID, String fname, String lname, String mname)
+        public void onCheckValidation(String TID, String fname, String lname)
         {
-            if (TID == "" || fname == "" || mname == "" || lname == "")
+            if (TID == "" || fname == "" ||  lname == "")
             {
                MessageBox.Show("Fill the Require fields!", "Warning",
                MessageBoxButtons.OK, MessageBoxIcon.Information);

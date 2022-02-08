@@ -24,20 +24,28 @@ namespace MC_Design.PanelForms.sub_panels
             this.Dispose();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Do you want to add new data?",
                      "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                API api = new API();
+              
                 try
                 {
-                    //add validation
-                    String year = HttpUtility.UrlEncode("" + tb_year.Text.ToString());
-                    String semester = HttpUtility.UrlEncode("" + cmb_semester.Text.ToString());
-                    String result = api.SendPost("http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/InsertSchoolYear.php", String.Format("year={0}&semester={1}", year, semester));
-                    Console.WriteLine(result);
+                    const string param = "school_year";
+                    string year = tb_year.Text;
+                    string semester = cmb_semester.Text;
+                    object mydata = new 
+                    {
+                        year = year,
+                        semester = semester,
+                        status = "Pending",
+                        isActive = "No"
+                    };
+                    var res = await RESTHelper.Post(param, mydata);
+                    
+                    Console.WriteLine(res);
                     //var details = JObject.Parse(result);
                     //Console.WriteLine(details);
 

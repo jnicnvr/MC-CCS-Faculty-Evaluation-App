@@ -82,14 +82,13 @@ namespace MC_Design.PanelForms.sub_panels
             cmb_status.SelectedIndex = -1;
             cmb_sy.SelectedIndex = -1;           
         }
-        private void onLoadSy()
+        private async void onLoadSy()
         {
             try
             {
-                API api = new API();
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchSyData.php";
+                string param = "school_year";
+                string res = await RESTHelper.GetAll(param);
 
-                String res = api.SendPost(req, "");
                 var data = JArray.Parse(res);
 
                 Console.WriteLine("res :",data);

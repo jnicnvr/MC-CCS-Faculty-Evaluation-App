@@ -19,7 +19,7 @@ namespace MC_Design.PanelForms
             InitializeComponent();
             onLoadLogs();
         }
-        private void onLoadLogs()
+        private async void onLoadLogs()
         {
 
             dataGridView1.Rows.Clear();
@@ -34,8 +34,8 @@ namespace MC_Design.PanelForms
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminLogs.php";
-                String res = api.SendPost(req, "");
+                string param = "admin_logs";
+                var res = await RESTHelper.GetAll(param);
 
                 var response = JArray.Parse(res);
 
@@ -63,7 +63,7 @@ namespace MC_Design.PanelForms
             }
         }
 
-        private void onLoadNofication()
+        private async void onLoadNofication()
         {
 
             dataGridView1.Rows.Clear();
@@ -83,10 +83,10 @@ namespace MC_Design.PanelForms
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminNotification.php";
-                String res = api.SendPost(req, "");
+                string param = "notification";
+                var res = await RESTHelper.GetAll(param);
 
-              //  MessageBox.Show("RESdata", res);
+                //  MessageBox.Show("RESdata", res);
                 var response = JArray.Parse(res);
                
                 //if(response == null || response.ToString() == "")
@@ -133,7 +133,7 @@ namespace MC_Design.PanelForms
         }
 
 
-         public void onLoadNotEvaluated()
+         public async void onLoadNotEvaluated()
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -152,10 +152,10 @@ namespace MC_Design.PanelForms
 
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminStudentsNotEvaluated.php";
-                String res = api.SendPost(req, "");
-
-
+                
+                string param = "not_yet_evaluated";
+                var res = await RESTHelper.GetAll(param);
+              
                 var result = JArray.Parse(res);
 
                 //MessageBox.Show(""+details1[0]["success"]);

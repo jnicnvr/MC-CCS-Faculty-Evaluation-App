@@ -19,7 +19,7 @@ namespace MC_Design.PanelForms.sub_panels
             InitializeComponent();
             onLoadEvaluationRestriction();
         }
-        private void onLoadEvaluationRestriction()
+        private async void onLoadEvaluationRestriction()
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -36,8 +36,8 @@ namespace MC_Design.PanelForms.sub_panels
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminEvaluationRestriction.php";
-                String res = api.SendPost(req, "");
+                string param = "evaluation_restriction";
+                var res = await RESTHelper.GetAll(param);
 
                 var response = JArray.Parse(res);
 

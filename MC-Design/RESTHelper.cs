@@ -31,11 +31,11 @@ namespace MC_Design
         }
 
 
-        public static async Task<string> Get(string param,string id)
-        {
+        public static async Task<string> Get(string param, string id)
+        {           
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage res = await client.GetAsync(baseURL + param+"/"+id))
+                using (HttpResponseMessage res = await client.GetAsync(baseURL + param +"/"+ id))
                 {
                     using (HttpContent content = res.Content)
                     {
@@ -47,14 +47,9 @@ namespace MC_Design
             return string.Empty;
         }
 
-        public static async Task<string> Post(string param, string code, string subject, string description)
+        public static async Task<string> Post(string param, object mydata)
         {
-            object mydata = new
-            {
-                code = code,
-                subject = subject,
-                description = description
-            };
+          
             var myContent = JsonConvert.SerializeObject(mydata);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.Excel;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -83,10 +84,11 @@ namespace MC_Design.PanelForms
              MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private async void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
            // MessageBox.Show("Loading in Background Please Wait");
-            const String URL = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/RegisterStudent.php";
+            const string param = "student";
+          
             try
             {
                 string _SID = string.Empty;
@@ -124,22 +126,37 @@ namespace MC_Design.PanelForms
                     index += 1;
                     _username = row.Cells[index].Value.ToString();
                     index += 1;
-                    _password = row.Cells[index].Value.ToString();                
+                    _password = row.Cells[index].Value.ToString();
 
-                    String SID = HttpUtility.UrlEncode("" + _SID);
-                    String Fname = HttpUtility.UrlEncode("" + _Fname);
-                    String Lname = HttpUtility.UrlEncode("" + _Lname);
-                    String Age = HttpUtility.UrlEncode("" + _Age);
-                    String Sex = HttpUtility.UrlEncode("" + _Sex);
-                    String Course = HttpUtility.UrlEncode("" + _Course);
-                    String year_level = HttpUtility.UrlEncode("" + _year_level);
-                    String section = HttpUtility.UrlEncode("" + _section);
-                    String username = HttpUtility.UrlEncode("" + _username);
-                    String password = HttpUtility.UrlEncode("" + _password);
-                    String result = api.SendPost(URL, String.Format("SID={0}&Fname={1}&Lname={2}&Age={3}&Sex={4}&Course={5}&year_level={6}&section={7}&username={8}&password={9}", SID, Fname, Lname, Age, Sex, Course, year_level, section, username, password));
+                    string SID = _SID;
+                    string Fname = _Fname;
+                    string Lname = _Lname;
+                    string Age = _Age;
+                    string Sex = _Sex;
+                    string Course = _Course;
+                    string year_level = _year_level;
+                    string section = _section;
+                    string username = _username;
+                    string password = _password;
 
+                    object mydata = new
+                    {
+                         SID = SID,
+                         Fname = Fname,
+                         Lname = Lname,
+                         Age = Age,
+                         Sex = Sex,
+                        curriculum = Course,
+                         year_level = year_level,
+                         section = section,
+                         username = username,
+                         password = password
+                     };
+                    Console.WriteLine(mydata);
+                    var res = await RESTHelper.Post(param, mydata);
+                    Console.WriteLine(res);
+                    //var details1 = JArray.Parse(res);
 
-                    //var details1 = JArray.Parse(result);
                     //var details = JObject.Parse(details1[0].ToString());
                     //MessageBox.Show("" + details1[0]["success"]);
 
@@ -150,7 +167,7 @@ namespace MC_Design.PanelForms
             catch(Exception err)
             {
                 Console.WriteLine("Error: ", err);
-                MessageBox.Show("504 Bad Request!");
+                MessageBox.Show("504 Bad Request!", err.ToString());
             }           
 
         }
@@ -172,19 +189,12 @@ namespace MC_Design.PanelForms
             dataGridView2.Refresh();
             dataGridView1.Visible = false;
             dataGridView2.Visible = true;
-
-            if (cmb_selection.SelectedIndex == -1 || tb_search.Text == "")
-            {
-                MessageBox.Show("Add Selection!", "Information",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                onSearchStudents(tb_search.Text);
-            }
+                      
+            onSearchStudents(tb_search.Text);
+            
         }
 
-        public void onLoadStudents()
+        public async void onLoadStudents()
         {         
             dataGridView2.Rows.Clear();
             dataGridView2.Refresh();
@@ -203,9 +213,8 @@ namespace MC_Design.PanelForms
 
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminStudentsList.php";
-                String res = api.SendPost(req, "");
-
+                string param = "student";
+                var res = await RESTHelper.GetAll(param);
 
                 var result = JArray.Parse(res);
 
@@ -244,7 +253,7 @@ namespace MC_Design.PanelForms
 
         }
 
-        public void onSearchStudents(String value)
+        public async void onSearchStudents(String value)
         {
             dataGridView2.Rows.Clear();
             dataGridView2.Refresh();
@@ -263,20 +272,23 @@ namespace MC_Design.PanelForms
 
             try
             {
-                              
-                String valueOf = HttpUtility.UrlEncode("" + value);
 
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/SearchAdminStudentList.php";
-                String res = api.SendPost(req, String.Format("valueOf={0}", valueOf));
-                
-                var result = JArray.Parse(res);
+                const string param = "student";
+                string id = value;
+                var res = await RESTHelper.Get(param, id);
 
-
+              
+                // var result = JArray.Parse(res2);
 
                 //MessageBox.Show(""+details1[0]["success"]);
+                var obj = JsonConvert.DeserializeObject(res);
+                var formatted = JsonConvert.SerializeObject(obj, Formatting.Indented);
+                 Console.WriteLine(formatted);
+                    Console.WriteLine("mydata", formatted);
 
-                foreach (JObject data in result)
+                foreach (JObject data in formatted)
                 {
+                    Console.WriteLine("mydata",data);
                     string SID;
                     string student_name;
                     string Age;

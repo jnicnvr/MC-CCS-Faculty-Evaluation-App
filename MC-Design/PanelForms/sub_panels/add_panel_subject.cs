@@ -24,7 +24,7 @@ namespace MC_Design.PanelForms.sub_panels
             this.Dispose();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Do you want to add new data?",
                      "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -34,22 +34,30 @@ namespace MC_Design.PanelForms.sub_panels
                 {
                     //add validation
                     panel_subjects panel = new panel_subjects();
-                    API api = new API();
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/InsertSubject.php";
-                    String code = HttpUtility.UrlEncode("" + tb_code.Text.ToString());
-                    String subject = HttpUtility.UrlEncode("" + tb_subject.Text.ToString());
-                    String description = HttpUtility.UrlEncode("" + tb_description.Text.ToString());
+                    // API api = new API();
+                    //String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/InsertSubject.php";
+                    //String code = HttpUtility.UrlEncode("" + tb_code.Text.ToString());
+                    //String subject = HttpUtility.UrlEncode("" + tb_subject.Text.ToString());
+                    //String description = HttpUtility.UrlEncode("" + tb_description.Text.ToString());
 
-                    String response = api.SendPost(req, String.Format("code={0}&subject={1}&description={2}", code, subject, description));
-                    var data = JObject.Parse(response);
+                    //String response = api.SendPost(req, String.Format("code={0}&subject={1}&description={2}", code, subject, description));
+                    string param = "subject";
+                    string code = tb_code.Text;
+                    string subject = tb_subject.Text;
+                    string description = tb_description.Text;
+                    object mydata = new
+                    {
+                        code = code,
+                        subject = subject,
+                        description = description                       
+                    };
+                    var res = await RESTHelper.Post(param, mydata);
+
+                    var data = JObject.Parse(res);
                     Console.WriteLine(data);
-                //    panel.onLoadSubjects();
-                    onCheckValidation(tb_code.Text, tb_subject.Text, tb_description.Text, "Added New Subject!");
-
-                   
-                  
-                  //  panel.dataGridView1.Rows.Clear();
-                 //   panel.dataGridView1.Refresh();
+                    isValidated(tb_code.Text, tb_subject.Text, tb_description.Text, "Added New Subject!");
+                                      
+                 
                 }
                 catch (Exception err)
                 {
@@ -61,7 +69,7 @@ namespace MC_Design.PanelForms.sub_panels
             }
             else if (dr == DialogResult.No) {}          
         }
-        public void onCheckValidation(String code, String subject, String description, String message)
+        public void isValidated(String code, String subject, String description, String message)
         {
             if (code == "" || subject == "" || description == "")
             {

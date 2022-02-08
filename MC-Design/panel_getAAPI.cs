@@ -22,7 +22,7 @@ namespace MC_Design.PanelForms
         private async void button1_Click(object sender, EventArgs e)
         {
             string param = "subject";
-          var res = await RESTHelper.GetAll(param);
+            var res = await RESTHelper.GetAll(param);
             txtRes.Text = res;
         }
 
@@ -40,7 +40,13 @@ namespace MC_Design.PanelForms
             string code = txtCode.Text; //NC101
             string subject = txtSubject.Text;
             string description = txtDescription.Text;
-            var res = await RESTHelper.Post(param, code, subject, description);
+            object mydata = new
+            {
+                code = code,
+                subject = subject,
+                description = description
+            };
+            var res = await RESTHelper.Post(param, mydata);
             txtRes.Text = res;
         }
 

@@ -12,14 +12,13 @@ using System.Windows.Forms;
 namespace MC_Design.PanelForms
 {
     public partial class panel_evaluation : Form
-    {
-        API api = new API();
+    {       
         public panel_evaluation()
         {
             InitializeComponent();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
         
             dataGridView1.Rows.Clear();
@@ -47,8 +46,9 @@ namespace MC_Design.PanelForms
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 try
                 {
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/RatingReportManagement.php";
-                    String res = api.SendPost(req, "");
+                    string param = "rating";
+                    string id = "Management";
+                    var res = await RESTHelper.Get(param, id);
                     var data = JArray.Parse(res);
 
                     string description;
@@ -123,8 +123,9 @@ namespace MC_Design.PanelForms
 
                 try
                 {
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/RatingReportEffectiveness.php";
-                    String res = api.SendPost(req, "");
+                    string param = "rating";
+                    string id = "Effectiveness";
+                    var res = await RESTHelper.Get(param, id);
                     var data = JArray.Parse(res);
 
                     string description;
@@ -198,8 +199,9 @@ namespace MC_Design.PanelForms
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 try
                 {
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/RatingReportPEPQ.php";
-                    String res = api.SendPost(req, "");
+                    string param = "rating";
+                    string id = "Professional Ethics and Personal Qualities";
+                    var res = await RESTHelper.Get(param, id);
                     var data = JArray.Parse(res);
 
                     string description;
@@ -296,58 +298,58 @@ namespace MC_Design.PanelForms
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
         }
-        private void onLoadComments()
+        private async void onLoadComments()
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
 
-            dataGridView1.ColumnCount = 10;
+            dataGridView1.ColumnCount = 9;
             dataGridView1.Columns[0].Name = "Student ID";
             dataGridView1.Columns[1].Name = "Student Name";
             dataGridView1.Columns[2].Name = "Course";
             dataGridView1.Columns[3].Name = "Subject Code";
-            dataGridView1.Columns[4].Name = "Faculty";
-            dataGridView1.Columns[5].Name = "Department";
-            dataGridView1.Columns[6].Name = "School Year";
-            dataGridView1.Columns[7].Name = "Semester";
-            dataGridView1.Columns[8].Name = "Comment";
-            dataGridView1.Columns[9].Name = "Created At";
+            dataGridView1.Columns[4].Name = "Subject";
+            dataGridView1.Columns[5].Name = "Faculty"; 
+            dataGridView1.Columns[6].Name = "Department"; 
+            dataGridView1.Columns[7].Name = "Comment";
+            dataGridView1.Columns[8].Name = "Created At";
+            //dataGridView1.Columns[8].Name = "Comment";
+           // dataGridView1.Columns[9].Name = "Created At";
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminFeedback.php";
-                String res = api.SendPost(req, "");
-
+                string param = "comment";               
+                var res = await RESTHelper.GetAll(param);
                 var response = JArray.Parse(res);
 
                 foreach (JObject data in response)
                 {
                     string SID;
                     string student_name;
-                    string _class;
+                    string course;
                     string code;
                     string subject;
                     string name;
                     string Department;
-                    string year;
-                    string semester;
+                  //  string year;
+                   // string semester;
                     string comment;
                     string created_at;
 
                     SID = data["SID"].ToString();
                     student_name = data["student_name"].ToString();
-                    _class = data["_class"].ToString();
+                    course = data["course"].ToString();
                     code = data["code"].ToString();
                     subject = data["subject"].ToString();
                     name = data["name"].ToString();
-                    Department = data["Department"].ToString();
-                    year = data["year"].ToString();
-                    semester = data["semester"].ToString();
+                    Department = data["department"].ToString();
+                   // year = data["year"].ToString();
+                   // semester = data["semester"].ToString();
                     comment = data["comment"].ToString();
                     created_at = data["created_at"].ToString();
 
-                    dataGridView1.Rows.Add(SID, student_name, _class, code, subject, name, Department, year, semester, comment, created_at);
+                    dataGridView1.Rows.Add(SID, student_name, course, code, subject, name, Department, comment, created_at);
 
                 }
                 // }

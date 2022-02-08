@@ -86,19 +86,19 @@ namespace MC_Design.PanelForms.sub_panels
             cmb_subject.SelectedIndex = -1;
             cmb_sy.SelectedIndex = -1;
         }
-        private void onLoadCriteriaFaculty()
+        private async void onLoadCriteriaFaculty()
         {
             try
             {
-                API api = new API();
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchRestrictionsDataFaculty.php";
-                String response = api.SendPost(req, "");
+                string param = "teacher";
+                string res = await RESTHelper.GetAll(param);
 
-                var data = JArray.Parse(response);            
-                Console.WriteLine(data);
+                var data = JArray.Parse(res);            
+                Console.WriteLine("teacher",data);
                 
                 foreach (JObject result in data)
                 {
+                  //  Console.WriteLine("teacher", result["name"]);
                     string name;
                     name = result["name"].ToString();
                     //fid = result["TID"].ToString();
@@ -111,21 +111,20 @@ namespace MC_Design.PanelForms.sub_panels
                 MessageBox.Show("500 Internal Error");
             }
         }
-        private void onLoadCriteriaClasses()
+        private async void onLoadCriteriaClasses()
         {
             try
             {
-                API api = new API();
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchRestrictionsDataClasses.php";
-                String response = api.SendPost(req, "");
+                string param = "class_list";
+                string res = await RESTHelper.GetAll(param);
 
-                var data = JArray.Parse(response);
-                Console.WriteLine(data);
+                var data = JArray.Parse(res);
+                Console.WriteLine("class_list",data);
 
                 foreach (JObject result in data)
                 {
                     string _classes;
-                    _classes = result["_classes"].ToString();
+                    _classes = result["_class"].ToString();
                     cmb_classes.Items.Add(_classes);
                 }
             }
@@ -135,15 +134,14 @@ namespace MC_Design.PanelForms.sub_panels
                 MessageBox.Show("500 Internal Error");
             }
         }
-        private void onLoadCriteriaSubject()
+        private async void onLoadCriteriaSubject()
         {
             try
             {
-                API api = new API();
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchRestrictionsDataSubject.php";
-                String response = api.SendPost(req, "");
+                string param = "subject";
+                string res = await RESTHelper.GetAll(param);
 
-                var data = JArray.Parse(response);
+                var data = JArray.Parse(res);
                 Console.WriteLine(data);
 
                 foreach (JObject result in data)
@@ -161,15 +159,14 @@ namespace MC_Design.PanelForms.sub_panels
             }
         }
 
-        private void onLoadCriteriaSy()
+        private async void onLoadCriteriaSy()
         {
             try
             {
-                API api = new API();
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchRestrictionsDataSy.php";
-                String response = api.SendPost(req, "");
+                string param = "school_year";
+                string res = await RESTHelper.GetAll(param);
 
-                var data = JArray.Parse(response);
+                var data = JArray.Parse(res);
                 Console.WriteLine(data);
 
                 foreach (JObject result in data)
@@ -177,9 +174,9 @@ namespace MC_Design.PanelForms.sub_panels
                     string sy;
                     string semester;
                     sy = result["year"].ToString();
-                    semester = result["semester"].ToString();
+                   // semester = result["semester"].ToString();
                     cmb_sy.Items.Add(sy);
-                    cmb_semester.Items.Add(semester);
+                    //cmb_semester.Items.Add(semester);
                 }
             }
             catch (Exception err)
