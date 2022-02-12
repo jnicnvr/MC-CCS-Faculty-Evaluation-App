@@ -22,7 +22,7 @@ namespace MC_Design
             Application.SetCompatibleTextRenderingDefault(false);
 
           // Application.Run(new panel_getAAPI());
-            //Application.Run(new Login());
+            Application.Run(new Login());
             //Application.Run(new add_panel_subject());
             //  Application.Run(new panel_subjects());
 
@@ -46,7 +46,7 @@ namespace MC_Design
             // Application.Run(new manage_sy());
 
             //Application.Run(new Register());
-           Application.Run(new Form1());
+          // Application.Run(new Form1());
         }
     }
 }

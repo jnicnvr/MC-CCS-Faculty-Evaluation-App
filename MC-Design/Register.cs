@@ -37,22 +37,40 @@ namespace MC_Design
             tb_username.Text = clearedtext;
             tb_password.Text = clearedtext;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            API api = new API();
+            //API api = new API();
             try
             {
                 //add validation
-                String TID = HttpUtility.UrlEncode("" + tb_id.Text.ToString());
-                String Fname = HttpUtility.UrlEncode("" + tb_firstname.Text.ToString());
-                String Lname = HttpUtility.UrlEncode("" + tb_lastname.Text.ToString());
-                String Position = HttpUtility.UrlEncode("" + tb_position.Text.ToString());
-                String username = HttpUtility.UrlEncode("" + tb_username.Text.ToString());
-                String password = HttpUtility.UrlEncode("" + tb_password.Text.ToString());
-                
-                String result = api.SendPost("http://fundamental-winches.000webhostapp.com/MCFE/FacultyRegister1.php", String.Format("TID={0}&Fname={1}&Lname={2}&username={3}&password={4}&position={5}", TID, Fname, Lname, username, password, Position));
-                var details = JObject.Parse(result);
+                //String TID = HttpUtility.UrlEncode("" + tb_id.Text.ToString());
+                //String Fname = HttpUtility.UrlEncode("" + tb_firstname.Text.ToString());
+                //String Lname = HttpUtility.UrlEncode("" + tb_lastname.Text.ToString());
+                //String Position = HttpUtility.UrlEncode("" + tb_position.Text.ToString());
+                //String username = HttpUtility.UrlEncode("" + tb_username.Text.ToString());
+                //String password = HttpUtility.UrlEncode("" + tb_password.Text.ToString());
 
+                string param = "auth/register_admin";
+                string admin_id = tb_id.Text; //NC101
+                string Fname = tb_firstname.Text;
+                string Lname = tb_lastname.Text;
+                string position = tb_position.Text;
+                string username = tb_username.Text;
+                string password = tb_password.Text;
+                object mydata = new
+                {
+                    admin_id = admin_id,
+                    Fname = Fname,
+                    Lname = Lname,
+                    position = position,
+                    username = username,
+                    password = password
+                };
+                var res = await RESTHelper.Post(param, mydata);               
+
+                //String result = api.SendPost("http://fundamental-winches.000webhostapp.com/MCFE/FacultyRegister1.php", String.Format("TID={0}&Fname={1}&Lname={2}&username={3}&password={4}&position={5}", TID, Fname, Lname, username, password, Position));
+                var details = JObject.Parse(res);
+                Console.WriteLine("Nico",details);
                 MessageBox.Show("" + details["success"]);
                 MessageBox.Show("Welcome to Faculty Evaluation System");
                 onClearText();

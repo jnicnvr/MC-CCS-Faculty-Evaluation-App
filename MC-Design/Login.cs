@@ -17,7 +17,7 @@ namespace MC_Design
 {
     public partial class Login : Form
     {
-        API api = new API();
+        //API api = new API();
         public Login()
         {
             InitializeComponent();
@@ -34,31 +34,44 @@ namespace MC_Design
             Environment.Exit(0);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {                     
-            string username = tb_username.Text.ToString();
-            string password = tb_password.Text.ToString();
-            String username1 = HttpUtility.UrlEncode(""+username);
-            String password1 = HttpUtility.UrlEncode(""+password);
+            //string username = tb_username.Text.ToString();
+            //string password = tb_password.Text.ToString();
+            //String username1 = HttpUtility.UrlEncode(""+username);
+            //String password1 = HttpUtility.UrlEncode(""+password);
             //MessageBox.Show("This", username1 + password1);
             try
-            {              
-                String result = api.SendPost("http://fundamental-winches.000webhostapp.com/MCFE/userslogin1.php", String.Format("username={0}&password={1}", username1, password1));
+            {
+                //String result = api.SendPost("http://fundamental-winches.000webhostapp.com/MCFE/userslogin1.php", String.Format("username={0}&password={1}", username1, password1));
+                string param = "auth/login_admin";
+                string username = tb_username.Text;
+                string password = tb_password.Text;
+              
+                object mydata = new
+                {
+                    username = username,
+                    password = password               
+                };
+                var res = await RESTHelper.Post(param, mydata);
+               
+
                 // var details1 = JArray.Parse(result);
-               // MessageBox.Show(result);
-                var details = JObject.Parse(result);
+                // MessageBox.Show(result);
+
+                var details = JObject.Parse(res);
                // MessageBox.Show("" + details);
                 string l = details["success"].ToString();
 
                 MessageBox.Show(l);
-                if (l == "True")
+                if (l == "true" || l == "True")
                 {
                     MessageBox.Show("Successfully Login");
                     tb_username.Text = "";
                     tb_password.Text = "";
 
                     Program.globalString = username;
-                    api.onAddLogs(username, "Login", "admin");
+                    onAddLogs(username, "Login", "admin");
                     Form1 home = new Form1();
                     home.Show();
                     onTerminateForm();
@@ -78,6 +91,21 @@ namespace MC_Design
 
         }
        
+        private async void onAddLogs(string name, string activity, string user_level)
+        {
+            string param = "admin_logs";          
+            object mydata = new
+            {
+                name = name,
+                activity = activity,
+                user_level = user_level
+            };
+            var res = await RESTHelper.Post(param, mydata);
+            var details = JObject.Parse(res);
+
+            Console.WriteLine("Logs",details);
+
+        }
         private void onTerminateForm()
         {
             Login login = new Login();
