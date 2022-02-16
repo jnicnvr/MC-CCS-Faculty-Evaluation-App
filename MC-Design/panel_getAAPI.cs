@@ -57,7 +57,13 @@ namespace MC_Design.PanelForms
             string subject = txtSubject.Text;
             string description = txtDescription.Text;
             string param = "subject";
-            var res = await RESTHelper.Put(param,id, code, subject, description);
+            object mydata = new
+            {
+                code = code,
+                subject = subject,
+                description = description                
+            };
+            var res = await RESTHelper.Put(param,id, mydata);
             txtRes.Text = res;
         }
 

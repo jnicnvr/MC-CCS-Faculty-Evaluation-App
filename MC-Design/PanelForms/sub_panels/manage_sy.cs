@@ -25,7 +25,7 @@ namespace MC_Design.PanelForms.sub_panels
             this.Dispose();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Do you want to add new data?",
                      "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -35,14 +35,29 @@ namespace MC_Design.PanelForms.sub_panels
                 try
                 {
                     //add validation
-                    String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/UpdateSyConfig.php";
+                    //String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/UpdateSyConfig.php";
 
-                    String sy = HttpUtility.UrlEncode("" + cmb_sy.Text.ToString());
-                    String semester = HttpUtility.UrlEncode("" + cmb_semester.Text.ToString());
-                    String isDefault = HttpUtility.UrlEncode("" + cmb_default.Text.ToString());
-                    String status = HttpUtility.UrlEncode("" + cmb_status.Text.ToString());
+                    //String sy = HttpUtility.UrlEncode("" + cmb_sy.Text.ToString());
+                    //String semester = HttpUtility.UrlEncode("" + cmb_semester.Text.ToString());
+                    //String isDefault = HttpUtility.UrlEncode("" + cmb_default.Text.ToString());
+                    //String status = HttpUtility.UrlEncode("" + cmb_status.Text.ToString());
 
-                    String res = api.SendPost(req, String.Format("sy={0}&semester={1}&isDefault={2}&status={3}", sy, semester, isDefault, status));
+                    //String res = api.SendPost(req, String.Format("sy={0}&semester={1}&isDefault={2}&status={3}", sy, semester, isDefault, status));
+                    string sy = cmb_sy.Text;
+                    string status = cmb_status.Text;
+                    string semester = cmb_semester.Text;
+                    string isDefault = cmb_default.Text;
+                    string param = "school_year";
+
+                    object mydata = new
+                    {
+                        sy = sy,
+                        status = status,
+                        semester = semester,
+                        isDefault = isDefault
+                    };
+
+                    var res = await RESTHelper.Put(param, sy, mydata);
                     // Console.WriteLine(result);
                     var data = JObject.Parse(res);
                     //Console.WriteLine(details);

@@ -69,14 +69,9 @@ namespace MC_Design
             }
             return string.Empty;
         }
-        public static async Task<string> Put(string param, string id, string code, string subject, string description)
+        public static async Task<string> Put(string param, string id, object mydata)
         {
-            object mydata = new
-            {
-                code = code,
-                subject = subject,
-                description = description
-            };
+          
             var myContent = JsonConvert.SerializeObject(mydata);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);
