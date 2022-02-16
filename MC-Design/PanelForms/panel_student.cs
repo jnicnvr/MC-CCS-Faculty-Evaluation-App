@@ -80,15 +80,15 @@ namespace MC_Design.PanelForms
         {
             backgroundWorker1.RunWorkerAsync();
             //  MessageBox.Show("Running like a shit!");         
-            MessageBox.Show("Loading in Background Please Wait", "Success",
-             MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show("Loading in Background Please Wait", "Success",
+            // MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private async void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
            // MessageBox.Show("Loading in Background Please Wait");
             const string param = "student";
-          
+        
             try
             {
                 string _SID = string.Empty;
@@ -139,6 +139,7 @@ namespace MC_Design.PanelForms
                     string username = _username;
                     string password = _password;
 
+                    Console.WriteLine(SID);
                     object mydata = new
                     {
                          SID = SID,
@@ -146,28 +147,33 @@ namespace MC_Design.PanelForms
                          Lname = Lname,
                          Age = Age,
                          Sex = Sex,
-                        curriculum = Course,
+                         curriculum = Course,
                          year_level = year_level,
                          section = section,
                          username = username,
                          password = password
                      };
-                    Console.WriteLine(mydata);
-                    var res = await RESTHelper.Post(param, mydata);
-                    Console.WriteLine(res);
-                    //var details1 = JArray.Parse(res);
 
+                    Console.WriteLine(mydata);
+                 
+                    //var details1 = JArray.Parse(res);
+                    //Console.WriteLine(details1);
                     //var details = JObject.Parse(details1[0].ToString());
                     //MessageBox.Show("" + details1[0]["success"]);
 
-                    int percentage = (row.Index + 1) * 100 / k;
-                    backgroundWorker1.ReportProgress(percentage);
+                    //int percentage = (row.Index + 1) * 100 / k;
+                    //backgroundWorker1.ReportProgress(percentage);
+                    var res = await RESTHelper.Post(param, mydata);
+                    Console.WriteLine(res);
                 }
+               
             }
             catch(Exception err)
             {
                 Console.WriteLine("Error: ", err);
                 MessageBox.Show("504 Bad Request!", err.ToString());
+                MessageBox.Show( err.ToString(), err.ToString());
+                Console.WriteLine(err.ToString());
             }           
 
         }
@@ -283,8 +289,8 @@ namespace MC_Design.PanelForms
                 //MessageBox.Show(""+details1[0]["success"]);
                 var obj = JsonConvert.DeserializeObject(res);
                 var formatted = JsonConvert.SerializeObject(obj, Formatting.Indented);
-                 Console.WriteLine(formatted);
-                    Console.WriteLine("mydata", formatted);
+                Console.WriteLine(formatted);
+                Console.WriteLine("mydata", formatted);
 
                 foreach (JObject data in formatted)
                 {

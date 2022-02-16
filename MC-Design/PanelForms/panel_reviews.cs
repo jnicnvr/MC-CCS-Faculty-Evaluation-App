@@ -13,14 +13,14 @@ namespace MC_Design.PanelForms
 {
     public partial class panel_reviews : Form
     {
-        API api = new API();
+        //API api = new API();
         public panel_reviews()
         {
             InitializeComponent();
             onLoadReviews();
         }
 
-        private void onLoadReviews()
+        private async void onLoadReviews()
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -33,9 +33,13 @@ namespace MC_Design.PanelForms
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminFeedback.php";
-                String res = api.SendPost(req, "");
+                //String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/FetchAdminFeedback.php";
+                //String res = api.SendPost(req, "");
 
+                string param = "feedback";
+                var res = await RESTHelper.GetAll(param);
+                Console.WriteLine("feedback get all");
+                Console.WriteLine(res);
                 var response = JArray.Parse(res);
             
                 foreach (JObject data in response)
@@ -61,7 +65,7 @@ namespace MC_Design.PanelForms
             }
         }
 
-        private void onSearchReviews(String rating)
+        private async void onSearchReviews(String rating)
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
@@ -74,13 +78,22 @@ namespace MC_Design.PanelForms
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/SearchAdminFeedback.php";
-                String res = api.SendPost(req, String.Format("rating={0}",rating));
+                //String req = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/SearchAdminFeedback.php";
+                //String res = api.SendPost(req, String.Format("rating={0}",rating));
+
+                string param = "feedback";
+                var res = await RESTHelper.Get(param, rating);
+                Console.WriteLine("feedback get ");
+                Console.WriteLine(res);
 
                 var response = JArray.Parse(res);
+                Console.WriteLine(response);
 
                 foreach (JObject data in response)
                 {
+                    Console.WriteLine("get");
+
+                    Console.WriteLine(data);
                     string type;
                     string feedback;
                     string created_at;

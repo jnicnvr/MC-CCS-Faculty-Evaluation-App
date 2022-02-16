@@ -61,9 +61,9 @@ namespace MC_Design
 
                 var details = JObject.Parse(res);
                // MessageBox.Show("" + details);
+                Console.WriteLine(details);
                 string l = details["success"].ToString();
-
-                MessageBox.Show(l);
+                //MessageBox.Show(l);
                 if (l == "true" || l == "True")
                 {
                     MessageBox.Show("Successfully Login");

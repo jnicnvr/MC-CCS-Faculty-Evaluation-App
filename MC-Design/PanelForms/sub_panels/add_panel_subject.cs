@@ -56,7 +56,6 @@ namespace MC_Design.PanelForms.sub_panels
                     var data = JObject.Parse(res);
                     Console.WriteLine(data);
                     isValidated(tb_code.Text, tb_subject.Text, tb_description.Text, "Added New Subject!");
-                                      
                  
                 }
                 catch (Exception err)
@@ -65,7 +64,6 @@ namespace MC_Design.PanelForms.sub_panels
                     MessageBox.Show("Request: 500 Internal Error");
                 }
              
-
             }
             else if (dr == DialogResult.No) {}          
         }

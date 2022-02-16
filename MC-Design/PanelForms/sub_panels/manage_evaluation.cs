@@ -31,7 +31,7 @@ namespace MC_Design.PanelForms.sub_panels
             this.Dispose();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Do you want to add new data?",
                      "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -40,21 +40,41 @@ namespace MC_Design.PanelForms.sub_panels
                 try
                 {
                     //add validation
-                    API api = new API();
-                    String URL = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/InsertRestrictions.php";
+                    //API api = new API();
+                    //String URL = "http://fundamental-winches.000webhostapp.com/MCFE/mc_evaluation/InsertRestrictions.php";
 
-                    String faculty = HttpUtility.UrlEncode("" + cmb_faculty.Text.ToString());
-                    String _classes = HttpUtility.UrlEncode("" + cmb_classes.Text.ToString());
-                    String subject = HttpUtility.UrlEncode("" + cmb_subject.Text.ToString());
-                    String sy = HttpUtility.UrlEncode("" + cmb_sy.Text.ToString());
-                    String semester = HttpUtility.UrlEncode("" + cmb_semester.Text.ToString());
+                    //String faculty = HttpUtility.UrlEncode("" + cmb_faculty.Text.ToString());
+                    //String _classes = HttpUtility.UrlEncode("" + cmb_classes.Text.ToString());
+                    //String subject = HttpUtility.UrlEncode("" + cmb_subject.Text.ToString());
+                    //String sy = HttpUtility.UrlEncode("" + cmb_sy.Text.ToString());
+                    //String semester = HttpUtility.UrlEncode("" + cmb_semester.Text.ToString());
 
-                    String response = api.SendPost(URL, String.Format("faculty={0}&_classes={1}&subject={2}&sy={3}&semester={4}", faculty, _classes, subject, sy, semester));
-                    Console.WriteLine(response);
-                    var data = JObject.Parse(response);
-                    Console.WriteLine(data);
+                    //String response = api.SendPost(URL, String.Format("faculty={0}&_classes={1}&subject={2}&sy={3}&semester={4}", faculty, _classes, subject, sy, semester));
+                    //Console.WriteLine(response);
+                    string param = "evaluation_restriction";
+                    string name = cmb_faculty.Text;
+                    string _class = cmb_classes.Text;
+                    string code = cmb_subject.Text;
+                    string year = cmb_sy.Text;
+                    string semester = cmb_semester.Text;
+
+                    object mydata = new
+                    {
+                        name = name,
+                        _class = _class,
+                        code = code,
+                        year = year,
+                        semester = semester
+                    };
+                
+                    var res = await RESTHelper.Post(param, mydata);
+                    Console.WriteLine(res);
+
+                    var data = JObject.Parse(res);
+                    Console.WriteLine("evaluation_restriction", data);
 
                     onCheckValidation(cmb_faculty.Text, cmb_classes.Text, cmb_subject.Text, cmb_sy.Text, cmb_semester.Text, "Added New Restrictions!");
+
                 }
                 catch (Exception err)
                 {
